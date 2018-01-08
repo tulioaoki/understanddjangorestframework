@@ -1,26 +1,19 @@
 from rest_framework import serializers
-from api.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
+from api.models import Subscription
 
-
-class SnippetSerializer(serializers.ModelSerializer):
+class CoreSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Snippet
-        fields = ('id', 'title', 'code', 'linenos', 'language', 'style')
+        model = Subscription
+        fields = ['name', 'cpf', 'email', 'phone', 'created_at']
 
     def create(self, validated_data):
-        """
-        Create and return a new `Snippet` instance, given the validated data.
-        """
-        return Snippet.objects.create(**validated_data)
+        return Subscription.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        """
-        Update and return an existing `Snippet` instance, given the validated data.
-        """
-        instance.title = validated_data.get('title', instance.title)
-        instance.code = validated_data.get('code', instance.code)
-        instance.linenos = validated_data.get('linenos', instance.linenos)
-        instance.language = validated_data.get('language', instance.language)
-        instance.style = validated_data.get('style', instance.style)
+        instance.name = validated_data.get('name', instance.name)
+        instance.cpf = validated_data.get('cpf', instance.cpf)
+        instance.email = validated_data.get('email', instance.email)
+        instance.phone = validated_data.get('phone', instance.phone)
+        instance.created_at = validated_data.get('created_at', instance.created_at)
         instance.save()
         return instance
