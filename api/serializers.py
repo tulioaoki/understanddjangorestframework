@@ -1,15 +1,17 @@
 from rest_framework import serializers
 from api.models import Subscription
+from django.contrib.auth.models import User
 
 class CoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscription
-        fields = ['id','name', 'cpf', 'email', 'phone', 'created_at']
+        fields = ['id','name', 'cpf', 'email', 'phone', 'created_at', ]
 
     def create(self, validated_data):
         return Subscription.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
+        instance.owner = validated_data.get(instance.owner,source='owner.username',)
         instance.id = validated_data.get('ID', instance.id)
         instance.name = validated_data.get('name', instance.name)
         instance.cpf = validated_data.get('cpf', instance.cpf)
@@ -18,3 +20,11 @@ class CoreSerializer(serializers.ModelSerializer):
         instance.created_at = validated_data.get('created_at', instance.created_at)
         instance.save()
         return instance
+
+
+class UserSerializer(serializers.ModelSerializer):
+    subs = serializers.PrimaryKeyRelatedField(many=True, queryset=Subscription.objects.all())
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'subs',)
