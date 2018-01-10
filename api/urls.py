@@ -4,7 +4,7 @@ from api import views
 
 urlpatterns = [
     url(r'^$', views.SubsList.as_view()),
-    url(r'^/(?P<pk>[0-9]+)/$', views.SubsDetail.as_view()),
+    url(r'^(?P<pk>[0-9]+)/$', views.SubsDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
