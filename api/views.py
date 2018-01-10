@@ -31,7 +31,7 @@ class SubsList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class SubsDetail(APIView):
-    http_method_names = ['get',]
+    http_method_names = ['get','put','delete']
 
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,)
@@ -61,10 +61,12 @@ class SubsDetail(APIView):
 
 
 class UserList(generics.ListAPIView):
+    http_method_names = ['get',]
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
-class UserDetail(generics.RetrieveAPIView):
+class UserDetail(generics.RetrieveAPIView):    http_method_names = ['get',]
+
     queryset = User.objects.all()
     serializer_class = UserSerializer
