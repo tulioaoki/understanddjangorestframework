@@ -11,7 +11,6 @@ class CoreSerializer(serializers.ModelSerializer):
         return Subscription.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.owner = validated_data.get(instance.owner,source='owner.username',)
         instance.id = validated_data.get('ID', instance.id)
         instance.name = validated_data.get('name', instance.name)
         instance.cpf = validated_data.get('cpf', instance.cpf)
@@ -27,4 +26,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'subs',)
+        fields = ('id', 'cpf','phone','email','created_at')
