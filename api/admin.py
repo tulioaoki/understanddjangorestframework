@@ -1,8 +1,6 @@
 from django.contrib import admin
 from api.models import Subscription
-
-
 class SubscriptionModelAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone', 'cpf', 'created_at',)
 
-admin.site.register(Subscription)
+admin.site.register(Subscription, SubscriptionModelAdmin)
