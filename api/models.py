@@ -13,6 +13,12 @@ class Subscription(models.Model):
     phone = models.CharField('Telefone',max_length=20)
     created_at = models.DateTimeField('Criado em',auto_now_add=True)
 
+    class Meta:
+        verbose_name_plural = 'Subscriptions'
+        verbose_name = 'Subscription'
+
+    def __str__(self):
+        return self.name
 
 #new
 def save(self, *args, **kwargs):

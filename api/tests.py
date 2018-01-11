@@ -1,3 +1,5 @@
 from django.test import TestCase
 
-# Create your tests here.
+class SubscriptionTest(TestCase):
+    def test_str(self):
+        self.assertEqual('Nome Sobrenome', str(self.obj))
