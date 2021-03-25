@@ -23,7 +23,7 @@ urllib3==1.22
 virtualenv==15.1.0
 virtualenv-clone==0.2.6
 Markdown==2.3.1
-PyYAML==3.10
+PyYAML==5.4
 defusedxml==0.4.1
 newrelic==2.12.0.10
 pystache==0.5.3
